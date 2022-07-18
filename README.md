@@ -13,6 +13,6 @@
 
 #### 测试环境
 
-- Debian 11
-- TexLive 2022
-- TeXStudio
+- 系统：Debian 11
+- 发行版：TexLive 2022
+- 编辑器：TeXStudio
