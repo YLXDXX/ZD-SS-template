@@ -1,0 +1,101 @@
+\documentclass{ZDSS}
+%载入西藏大学本科毕业论文模板
+
+
+%在写作中，自己需要用到的一些宏包
+%在此处导言区加载使用
+%例
+%\usepackage{CJKspace}
+
+
+
+
+
+\begin{document}
+
+
+%原样输出请用抄录环境（verbatim）
+%行内的直接写 \verb 命令
+
+
+
+%封面信息
+%跟据自己情况填写
+
+
+\IDnumber{15210301123} %学号
+\SecretLevel{公开} %密级：公开、限制、秘密、机密、绝密
+\TitleZh{拉比对分子束方法的继承及其 \\ 物理学成就概述} %学位论文中文题目，可换行
+\TitleEn{Rabi's Inheritances on Molecular Beam Method and \\ an Overview of His Physical Achievements} %学位论文英文题目，可换行
+\Name{王小二} %姓名
+\Teacher{厉老师} %指导教师
+\Teacher{厉老师} %指导教师
+\JobTitle{教授} %指导教师的职称
+\Department{文学院} %院（部、中心）
+\Major{中国少数民族语言文学} %专业
+\Direction{藏族传统诗学研究} %研究方向
+\Date{2019年5月13日} %完成日期
+
+
+
+%封面
+\cover %用于生成封面
+
+
+%郑重声明
+\statement %用于生成论文作者声明
+
+
+%摘要
+\include{1/中文摘要}
+\include{1/英文摘要}
+
+
+
+
+%目录
+\mulucreat
+
+
+
+%论文主体部分
+
+\include{1/正文测试} %此文测试用
+
+
+
+
+
+%参考文献
+%参考文献放置位置为 date/refer.bib
+\bibliography{date/refer.bib}
+\PrintBibliography %参考文献辅助，匆删
+
+
+
+
+
+%附录
+%若不需要，请注释相关内容
+\Appendix %这个命令表示附录开始，勿删
+\include{1/附录A}
+\include{1/附录B}
+
+
+
+%科研成果与致谢
+\ResearchThinks %设置相关科研成果目录和致谢的标题，匆删
+
+
+
+%攻读学位期间
+\include{1/攻读学位期间科研成果}
+
+
+
+%致谢
+\include{1/致谢}
+
+
+
+\end{document}
