@@ -487,9 +487,9 @@ contentsname = 目\texttt{\char32}录,
 %参考文献
 %需要使用bibtex引擎编译
 \newcommand{\PrintBibliography}{
+\clearpage
 \phantomsection %让超链接能够正确链接，一般是加入目录用
 \addcontentsline{toc}{chapter}{参考文献}
-\clearpage
 }
 
 
