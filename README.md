@@ -15,6 +15,7 @@
 
 - 系统：Debian 11
 - 发行版：TexLive 2022
+- 编译器：XeLaTeX
 - 编辑器：TeXStudio
 
 #### 其它相关
