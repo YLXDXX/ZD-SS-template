@@ -106,23 +106,38 @@
 
 % 英文字体配置部分
 %\setmainfont{Times New Roman}%英文正文
-\setmainfont{times.ttf}[Path = fonts/,BoldFont = timesbd.ttf ,ItalicFont = timesi.ttf ,BoldItalicFont = timesbi.ttf ]
+\setmainfont{times.ttf}[Path = fonts/, BoldFont = timesbd.ttf, ItalicFont = timesi.ttf, BoldItalicFont = timesbi.ttf]
 
 %\setsansfont{Source Sans Pro}%英文无衬线
 %\setmonofont{Source Code Pro}%英文等宽
 %这里会影响公式字体出问题，需用fontspec的no-math选项解决，见上
-
+%
 % 中文字体配置部分
-\setCJKmainfont[AutoFakeBold=true,AutoFakeSlant=true]{宋体}%中文正文
+%
+
+\xeCJKsetup{AutoFallBack=true} %用于生僻字显示
+
+%自定义字体命令
+\setCJKfamilyfont{WinSongTi}[Path = fonts/,AutoFakeBold=2,AutoFakeSlant=true,
+							FallBack={[Path = fonts/,AutoFakeBold=2,AutoFakeSlant=true,]{simsunb.ttf}},]{simsun.ttc} %宋体
+\setCJKfamilyfont{WinKaiTi}[Path = fonts/,AutoFakeBold=2,AutoFakeSlant=true,]{simkai.ttf} %楷体
+\setCJKfamilyfont{WinHeiTi}[Path = fonts/,AutoFakeSlant=true,]{simhei.ttf} %黑体
+%相要使用的话用 \CJKfamily{WinSongTi} 即可
+
+%\setCJKmainfont[AutoFakeBold=true,AutoFakeSlant=true]{宋体}%中文正文
+\setCJKmainfont[Path = fonts/,AutoFakeBold=2,AutoFakeSlant=true,
+				FallBack={[Path = fonts/,AutoFakeBold=2,AutoFakeSlant=true,]{simsunb.ttf}},]{simsun.ttc} %正文宋体
+
+%重定义 ctexbook 中一些字体命令
+\RenewDocumentCommand{\songti}{}{\CJKfamily{WinSongTi}}
+\RenewDocumentCommand{\kaishu}{}{\CJKfamily{WinKaiTi}}
+\RenewDocumentCommand{\heiti}{}{\CJKfamily{WinHeiTi}}
+
 %\emph \textbf \bfseries  \textit \itshape 等对中文有效
 %也就有了中文对应的粗体和斜体
 %\setCJKsansfont{黑体}%中文无衬线
 %\setCJKmonofont{楷体}%中文等宽
 
-%自定义字体命令示例
-%\setCJKfamilyfont{boldsong}{Source Han Serif SC Heavy}
-%\setCJKfamilyfont{hwxk}{HYXiaoLiShuJ} %使用华文行楷字体
-%\newcommand{\myfonta}{\CJKfamily{hwxk}}
 
 
 %单个汉字字宽 \ccwd
