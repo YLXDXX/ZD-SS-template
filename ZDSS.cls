@@ -36,6 +36,40 @@
 
 
 
+%
+% 定义变量
+%
+
+
+%基本信息
+\tl_new:N   \l_ZD_degree_type_tl % 学位类型
+\tl_new:N   \l_ZD_thesis_title_zh_tl % 论文题目，中文
+\tl_new:N   \l_ZD_thesis_title_zh_text_tl % 论文题目，中文，纯文字
+\tl_new:N   \l_ZD_thesis_title_en_tl % 论文题目，英文
+\tl_new:N   \l_ZD_student_name_tl % 学生姓名
+\tl_new:N   \l_ZD_student_number_tl % 学生学号
+\tl_new:N   \l_ZD_teacher_name_tl % 导师姓名
+\tl_new:N   \l_ZD_teacher_title_tl % 导师职称
+\tl_new:N   \l_ZD_college_tl % 学院
+\tl_new:N   \l_ZD_major_tl % 专业
+\tl_new:N   \l_ZD_research_orientation_tl % 研究方向
+\tl_new:N   \l_ZD_complete_date_tl % 完成日期
+\tl_new:N   \l_ZD_school_name_tl % 学校名称
+\tl_new:N   \l_ZD_school_code_tl % 学校代码
+\tl_new:N   \l_ZD_security_classification_tl % 论文密级
+
+%功能控制
+\bool_new:N   \l_ZD_terms_create_bool %是否添加术语表
+\bool_new:N   \l_ZD_print_version_bool %是否生成打印版本PDF
+\bool_new:N \l_ZD_anonymously_review_bool % 是否启用盲审格式
+
+
+
+%
+%模板基本设置
+%
+
+
 \PassOptionsToPackage{no-math}{fontspec}%让正文中的字体设置不影响数学公式
 
 %正文为宋体小四号字
@@ -132,7 +166,16 @@
 %设置页眉页脚
 %此处的奇偶页不同设置只有在twoside下才有效
 \newcounter{MyPageAllCounter} %用于总页数的计数器
-\setcounter{MyPageAllCounter}{3} %封面和声明占两页，从 3 页开始
+\bool_if:NTF {\l_ZD_print_version_bool}
+{
+	%为真
+	\setcounter{MyPageAllCounter}{5} %封面+声明+空白页占 4 页，从 5 页开始
+}
+{
+	%为假
+	\setcounter{MyPageAllCounter}{3} %封面和声明占 2 页，从 3 页开始
+}
+
 
 %正文部分页眉页脚
 \newpagestyle{my-body-style}[]
@@ -345,28 +388,12 @@ contentsname = 目\hspace{\ccwd}录,
 
 
 %
-% 定义变量
+%
+%下面是本模板自定义的一些功能与命令
+%采用LaTeX3语法编写
+%
 %
 
-\bool_new:N \l_ZD_anonymously_review_bool % 是否启用盲审格式
-
-%基本信息
-\tl_new:N   \l_ZD_degree_type_tl % 学位类型
-\tl_new:N   \l_ZD_thesis_title_zh_tl % 论文题目，中文
-\tl_new:N   \l_ZD_thesis_title_zh_text_tl % 论文题目，中文，纯文字
-\tl_new:N   \l_ZD_thesis_title_en_tl % 论文题目，英文
-\tl_new:N   \l_ZD_student_name_tl % 学生姓名
-\tl_new:N   \l_ZD_student_number_tl % 学生学号
-\tl_new:N   \l_ZD_teacher_name_tl % 导师姓名
-\tl_new:N   \l_ZD_teacher_title_tl % 导师职称
-\tl_new:N   \l_ZD_college_tl % 学院
-\tl_new:N   \l_ZD_major_tl % 专业
-\tl_new:N   \l_ZD_research_orientation_tl % 研究方向
-\tl_new:N   \l_ZD_complete_date_tl % 完成日期
-\tl_new:N   \l_ZD_school_name_tl % 学校名称
-\tl_new:N   \l_ZD_school_code_tl % 学校代码
-\tl_new:N   \l_ZD_security_classification_tl % 论文密级
-\bool_new:N   \l_ZD_terms_create_bool %术语表
 
 
 %基本信息键值对
@@ -389,6 +416,8 @@ contentsname = 目\hspace{\ccwd}录,
     security_classification .tl_set:N  = \l_ZD_security_classification_tl,
     
     terms_create .bool_set:N = \l_ZD_terms_create_bool,
+    print_version .bool_set:N = \l_ZD_print_version_bool,
+    anonymously_review .bool_set:N = \l_ZD_anonymously_review_bool,
     
     % 初始值
     degree_type .initial:n  = { 学术学位 },
@@ -396,6 +425,8 @@ contentsname = 目\hspace{\ccwd}录,
     school_code .initial:n  = { 10694 },
     security_classification .initial:n  = { 公开 },
     terms_create .initial:n = {false},
+    print_version .initial:n = {false},
+    anonymously_review .initial:n = {false},
 }
 
 
@@ -479,7 +510,16 @@ contentsname = 目\hspace{\ccwd}录,
 \end{center}
 \endgroup
 \clearpage
-\newpage
+
+\bool_if:NTF {\l_ZD_print_version_bool}
+{
+	%若为真，则需加入空白页
+	\thispagestyle{empty} \null \newpage % 插入空白页
+}
+{
+	\newpage
+}
+
 }
 
 %作者声名
@@ -525,7 +565,16 @@ contentsname = 目\hspace{\ccwd}录,
 \end{center}
 \endgroup
 \clearpage
-\newpage
+
+\bool_if:NTF {\l_ZD_print_version_bool}
+{
+	%若为真，则需加入空白页
+	\thispagestyle{empty} \null \newpage % 插入空白页
+}
+{
+	\newpage
+}
+
 }
 
 
@@ -609,14 +658,24 @@ contentsname = 目\hspace{\ccwd}录,
 %若为假，什么都不做
 }
 
-\int_if_odd:nTF {\theMyPageAllCounter} %判断奇偶，第一章（绪论）需为装订的右页
-{} % true
-{ % false
-\thispagestyle{empty} \null \stepcounter{MyPageAllCounter} \newpage} % false, 为奇，插入空白页
+
+\bool_if:NTF {\l_ZD_print_version_bool}
+{
+	%若为真，则需判断是否需要加入空白页
+	\int_if_odd:nTF {\theMyPageAllCounter} %判断奇偶，第一章（绪论）需为装订的右页
+	{} % true
+	{ % false
+	\thispagestyle{empty} \null \stepcounter{MyPageAllCounter} \newpage % false, 为奇，插入空白页
+	}
+}
+{
+%若为假，什么都不做
+}
+
+%正文部分页眉页脚，页码编号
 \setcounter{page}{1} %正文页码计数开始
 \pagenumbering{arabic} %页码数字计数
 \pagestyle{my-body-style} %正文部分页眉页脚
-
 }
 
 
