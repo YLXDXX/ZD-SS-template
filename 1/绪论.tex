@@ -3,29 +3,48 @@
 
 
 
-
-
-
 \zhlipsum[1]
 
+\section{术语测试}
+
+\myterm{你好}{nihao}
+\myterm[1]{嗨}{hi}
+\myterm{你好}{nihao}
+\myterm[1]{嗨}{hi}
+\myterm{你好}{nihao}
+\myterm[1]{嗨}{hi}
+\myterm{你好}{nihao}
+\myterm[1]{嗨}{hi}
+\myterm{你好}{nihao}
+\myterm[1]{嗨}{hi}
+\myterm{你好}{nihao}
+\myterm[1]{嗨}{hi}
+\myterm{你好}{nihao}
+\myterm[1]{嗨}{hi}
+\myterm{你好}{nihao}
+\myterm[1]{嗨}{hi}
+\myterm{你好}{nihao}
+\myterm[1]{嗨}{hi}
+
+
 \section{表格测试}
+\zhlipsum[1]
 
 \begin{table}[h!]
-\centering 
-\caption{表格示例}
+	\centering 
+	\caption{三线表示例}
+	\begin{tblr}{lccr}
+		\toprule
+		Alpha   & Beta  & Gamma  & Delta \\
+		\midrule
+		Epsilon & Zeta  & Eta    & Theta \\
+		Iota    & Kappa & Lambda & Mu    \\
+			OK    & Good & Nice & Well    \\
+		\bottomrule
+	\end{tblr}
+\end{table}
 
-\begin{tblr}{lccr}
-	\hline
-	Alpha   & Beta  & Gamma  & Delta  \\
-	\hline
-	Epsilon & Zeta  & Eta    & Theta \\
-	\hline
-	Iota    & Kappa & Lambda & Mu    \\
-	\hline
-\end{tblr}
-\end{table} 
 
-注意，在表格的正文部分，其中的标题应：中文需用黑体「\verb+\heiti+」，英文需要加粗「\verb+\textbf{text}+」
 
 
 
@@ -33,21 +52,24 @@
 
 \section{参考文献测试}
 
-张三\cite{叶普1993关于对瞬心的动量矩定理}提出。
-张三\cite{爱因斯坦文集2009}提出。
-张三\cite{叶普1993关于对瞬心的动量矩定理}提出。
-张三\cite{叶普1993关于对瞬心的动量矩定理,2003张量分析,lanczos1986variational}提出。
+可以参看 \parencite{Weng:2017jyh,Biro:2017flp,Hod:2017ssh}。
+张三 \cite{叶普1993关于对瞬心的动量矩定理}提出。
+张三 \parencite{爱因斯坦文集2009}提出。
+张三 \cite{叶普1993关于对瞬心的动量矩定理}提出。
+张三 \cite{叶普1993关于对瞬心的动量矩定理,2003张量分析,lanczos1986variational}提出。
 海上生明月\footnote{脚注测试1}，
 海上生明月\footnote{脚注测试2，脚注测试2}。
-文献\citestyle{numbers}\cite{2003张量分析}中说明。
-文献\citestyle{numbers}\cite{叶普1993关于对瞬心的动量矩定理,2003张量分析,lanczos1986variational}中说明。
-张三\citestyle{super}\cite{爱因斯坦文集2009,叶普1993关于对瞬心的动量矩定理,2003张量分析,lanczos1986variational}提出。
+文献 \cite{2003张量分析}中说明。
+文献 \cite{叶普1993关于对瞬心的动量矩定理,2003张量分析,lanczos1986variational}中 说明。
+张三 \parencite{爱因斯坦文集2009,叶普1993关于对瞬心的动量矩定理,2003张量分析,lanczos1986variational}提出。
+
+可以参看\cite{Litvinova:2017jnd,Li:2017kdj}。
 
 
 
 \section{脚注测试}%二级标题
 
-\zhlipsum[2]
+\zhlipsum[2-3]
 海上生明月\footnote{脚注测试1}
 海上生明月\footnote{脚注测试2，脚注测试2}
 海上生明月\footnote{脚注测试1}
@@ -79,25 +101,31 @@
 
 \zhlipsum[3]
 
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{0.4\linewidth}
+		\centering
+		\includegraphics[scale=.5]{example-image-a}
+		\caption{说明}\label{}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.4\linewidth}
+		\centering
+		\includegraphics[scale=.5]{example-image-b}
+		\caption{演示}\label{}
+	\end{subfigure}
+	\caption{图片排版示例}
+\end{figure}
+
 \subsubsection{实验装置}%四级标题
 
 \zhlipsum[4]
 
 
-\section{文本测试}%三级标题
-
-
-
-\zhlipsum[5]
-
-\subsection{文本三级标题}%三级标题
-
-\zhlipsum[6]
-
-
-
 \chapter{实验装置原理}%大标题
 
+\zhlipsum[4]
 
 \section{图片测试}
 
@@ -118,7 +146,7 @@
 		\includegraphics[scale=.5]{example-image-b}
 		\caption{演示}\label{}
 	\end{subfigure}
-	\caption{图片排版示例，超长}
+	\caption{图片排版示例}
 \end{figure}
 
 \section{公式测试}
@@ -167,7 +195,6 @@
 
 
 
-
 \section{各种引用测试}
 
 \subsection{图片引用}
@@ -185,50 +212,49 @@
 		\includegraphics[scale=.5]{example-image}
 		\caption{演示}\label{图片引用测试b}
 	\end{subfigure}
-	\caption{超长长长长长长长长长长长长长长长长长长长长长长长长长长\\ 长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长标题，图片引用测试}\label{图片引用测试}
+	\caption{超长长长长长长长长长长长长\\ 长长长长长长长长长长长长长长长长长长长长长长长长\\ 长长长长长长长长长长长长长长长长长长长长标题，图片引用测试}\label{图片引用测试}
 \end{figure}
 
-参见图 \ref{图片引用测试} ，参见子图 \ref{图片引用测试a}，见子图\ref{图片引用测试b}。长标题可手动换行。
+参见图 \ref{图片引用测试} ，参见子图 \ref{图片引用测试a}，见子图 \ref{图片引用测试b}。长标题可手动换行。
+
+
 
 \subsection{表格引用}
 
 
-
-
-
-
 \begin{table}[h!]
-\centering
-\caption{表格引用测试}\label{表格引用测试}
-\begin{subtable}{0.4\linewidth}
 	\centering
+	\caption{表格引用测试}\label{表格引用测试}
+	\begin{subtable}{0.4\linewidth}
+		\centering
 		\begin{tblr}{
-			row{odd} = {bg=azure8},
-			row{1}   = {bg=azure3, fg=white, font=\sffamily},
-		}
-		Alpha & Beta    & Gamma \\
-		Delta & Epsilon & Zeta  \\
-		Eta   & Theta   & Iota  \\
-		Kappa & Lambda  & Mu    \\
-		Nu Xi Omicron & Pi Rho Sigma & Tau Upsilon Phi \\
-	\end{tblr}
-	\caption{测试a}\label{表格引用测试a}
-\end{subtable}
-\hfill
-\begin{subtable}{0.4\linewidth}
-	\centering
-	$\begin{tblr}{
-			column{1} = {mode=text},
-			column{3} = {mode=dmath},
-		}
-		\hline
-		Alpha   & \frac12 & \frac12 \\
-		Epsilon & \frac34 & \frac34 \\
-		Iota    & \frac56 & \frac56 \\
-		\hline
-	\end{tblr}$
-	\caption{测试b}\label{表格引用测试b}
-\end{subtable}
+				row{odd} = {bg=azure8},
+				row{1}   = {bg=azure3, fg=white, font=\sffamily},
+			}
+			Alpha & Beta    & Gamma \\
+			Delta & Epsilon & Zeta  \\
+			Eta   & Theta   & Iota  \\
+			Kappa & Lambda  & Mu    \\
+			Nu Xi Omicron & Pi Rho Sigma & Tau Upsilon Phi \\
+		\end{tblr}
+		\caption{测试a}\label{表格引用测试a}
+	\end{subtable}
+	\hfill
+	\begin{subtable}{0.4\linewidth}
+		\centering
+		$\begin{tblr}{
+				column{1} = {mode=text},
+				column{3} = {mode=dmath},
+			}
+			\hline
+			Alpha   & \frac12 & \frac12 \\
+			Epsilon & \frac34 & \frac34 \\
+			Iota    & \frac56 & \frac56 \\
+			Epsilon & \frac34 & \frac34 \\
+			\hline
+		\end{tblr}$
+		\caption{测试b}\label{表格引用测试b}
+	\end{subtable}
 \end{table}
 
 
@@ -248,11 +274,11 @@
 公式 (\ref{公式引用测式}) 参见。 
 \begin{subequations}
 	\begin{align}
-1+1&>1 \label{公式引用测式a}\\
-1+2+3+4 & > 4 \label{公式引用测式b}
-\end{align}
+		1+1&>1 \label{公式引用测式a}\\
+		1+2+3+4 & > 4 \label{公式引用测式b}
+	\end{align}
 \end{subequations}
-见公式 \ref{公式引用测式a}，见 \ref{公式引用测式b}。
+见公式 \eqref{公式引用测式a}，见 \eqref{公式引用测式b}。
 
 
 
@@ -263,22 +289,22 @@
 \begin{table}[h!]
 	\centering
 	\caption{表头加注释 \protect\footnotemark ，表头添加参考文献\cite{叶普1993关于对瞬心的动量矩定理}}
-\begin{tblr}{
-		hline{1,Z} = {2pt},
-		hline{2,Y} = {1pt},
-		hline{3-X} = {dashed},
-	}
-	Alpha   & Beta & Gamma   & Delta   \\
-	Epsilon & Zeta  & Eta     & Theta   \\
-	Iota    & Kappa & Lambda  & Mu      \\
-	Nu      & Xi    & Omicron & Pi      \\
-	Rho     & Sigma & Tau     & Upsilon \\
-	Phi     & Chi   & Psi     & Omega   \\
-\end{tblr}
+	\begin{tblr}{
+			hline{1,Z} = {2pt},
+			hline{2,Y} = {1pt},
+			hline{3-X} = {dashed},
+		}
+		Alpha   & Beta & Gamma   & Delta   \\
+		Epsilon & Zeta  & Eta     & Theta   \\
+		Iota    & Kappa & Lambda  & Mu      \\
+		Nu      & Xi    & Omicron & Pi      \\
+		Rho     & Sigma & Tau     & Upsilon \\
+		Phi     & Chi   & Psi     & Omega   \\
+	\end{tblr}
 \end{table}
 \footnotetext{表头加注释}
 
-\zhlipsum[2]
+\zhlipsum[2-3]
 
 
 \begin{table}[h!]
@@ -287,8 +313,6 @@
 	\begin{threeparttable}
 		\begin{tabular}{*4{c}}\toprule
 			Table head\tnote{a} & Table head & Table head & Table head\tnote{b} \\ \midrule
-			Some values & Some values & Some values & Some values \\
-			Some values & Some values & Some values & Some values \\
 			Some values & Some values & Some values & Some values \\
 			Some values & Some values & Some values & Some values \\ \bottomrule
 		\end{tabular}
@@ -310,6 +334,7 @@
 	\label{fig:pic1}
 \end{figure}
 \footnotetext{frog图片注释测试}
+
 
 
 \section{理论计算}%二级标题
