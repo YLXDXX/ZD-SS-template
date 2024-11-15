@@ -1,36 +1,30 @@
 \item
-你好 \quad nihao
+类星体：quasi-stellar objects, QSOs
 \item
-嗨 \quad hi
+解析解：analytic solution
 \item
-你好 \quad nihao
+形式体系：formalism
 \item
-嗨 \quad hi
+非对角线的：off-diagonal
 \item
-你好 \quad nihao
+规范不变的：gauge-invariant
 \item
-嗨 \quad hi
+各向异性的：anisotropic
 \item
-你好 \quad nihao
+共动规范：comoving-gauge
 \item
-嗨 \quad hi
+设定：set-up
 \item
-你好 \quad nihao
+编码：encode
 \item
-嗨 \quad hi
+解码：decode
 \item
-你好 \quad nihao
+原初黑洞：primordial black holes, PBHs
 \item
-嗨 \quad hi
+重加热：reheating
 \item
-你好 \quad nihao
+量子色动力学转变：Quantum Chromodynamics transition, QCD transition
 \item
-嗨 \quad hi
+重电离：reionization
 \item
-你好 \quad nihao
-\item
-嗨 \quad hi
-\item
-你好 \quad nihao
-\item
-嗨 \quad hi
+强能量条件：strong energy condition, SEC

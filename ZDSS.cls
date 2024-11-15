@@ -649,6 +649,7 @@ contentsname = 目\hspace{\ccwd}录,
 \chapter*{中英术语表}
 \begin{multicols}{2}
 	\begin{itemize}
+		\setlength\itemsep{0mm}
 		\input{date/terms.txt}
 	\end{itemize}
 \end{multicols}
@@ -733,7 +734,8 @@ contentsname = 目\hspace{\ccwd}录,
 	\iow_now:Nx \l_temp_trems_iow {
 		\c_backslash_str item
 		^^J %换行符
-		#2~\c_backslash_str quad~#3
+		%#2~\c_backslash_str quad~#3
+		 #2：#3
 		 }
 }
 
