@@ -449,6 +449,19 @@ contentsname = 目\hspace{\ccwd}录,
 \NewDocumentCommand \BasicInfomation { m }
 {
     \keys_set:nn { ZD_basic_information } { #1 }
+    
+    \bool_if:NTF {\l_ZD_anonymously_review_bool}
+    {
+		%启用盲审格式时，隐去有关信息
+		\regex_replace_all:nnN{.}{＊}{\l_ZD_student_name_tl} %姓名
+		\regex_replace_all:nnN{.}{*}{\l_ZD_student_number_tl} %学号
+		\regex_replace_all:nnN{.}{＊}{\l_ZD_teacher_name_tl} %导师姓名
+		\regex_replace_all:nnN{.}{＊}{\l_ZD_teacher_title_tl} %导师职称
+		
+		%设置打印PDF版本为假
+		\bool_set_false:N \l_ZD_print_version_bool
+    }
+    {}
 }
 
 
