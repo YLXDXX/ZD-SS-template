@@ -523,8 +523,8 @@ contentsname = 目\hspace{\ccwd}录,
 			colspec={lcm{13\ccwd}},
 			hline{1}={white},
 			hlines = {2-3}{solid},
-			leftsep=0pt,
-			rightsep=0pt,
+			columns = {leftsep=0pt, rightsep=0pt,},
+			rows = {abovesep=8pt,belowsep=-1pt},
 		} %这里不能用两个\space，会被压缩成一个
 		\makebox[5\ccwd][s]{姓名}：~\hspace{0.5em} & \texttt{\char32}\texttt{\char32} & \tl_use:N \l_ZD_student_name_tl \\
 		\makebox[5\ccwd][s]{指导教师}：~ & & \tl_use:N \l_ZD_teacher_name_tl 
