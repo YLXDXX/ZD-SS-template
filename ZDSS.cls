@@ -1,8 +1,8 @@
 %%% % -*- coding: utf-8 -*-
 %%% ----------------------------------------------------------------------------
-%%% ZD_master: 西藏大学硕士毕业论文模板
-%%% Copyright : 2021-2023 (c) <ylxdxx@qq.com>
-%%% Repository: https://github.com/ylxdxx/?????
+%%% ZDSS: 西藏大学硕士毕业论文模板
+%%% Copyright : 2021-2024 (c) <ylxdxx@qq.com>
+%%% Repository: https://gitee.com/ylxdxx/ZD-SS-template
 %%% License   : The LaTeX Project Public License 1.3c
 %%% ----------------------------------------------------------------------------
 
@@ -26,7 +26,7 @@
 %more importantly turn it off at the end of the package. 
 %It also deals properly with nested package loading, and
 %so is the recommended way to use LaTeX3 syntax inside LaTeX2e packages.
-\ProvidesExplPackage{ZD_master} % Package name
+\ProvidesExplPackage{ZDSS} % Package name
 {2024-02-16} % Release date
 {0.1} % Release version
 {西藏大学硕士毕业论文模板} % Description
