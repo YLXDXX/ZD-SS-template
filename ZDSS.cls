@@ -1,6 +1,6 @@
 %%% % -*- coding: utf-8 -*-
 %%% ----------------------------------------------------------------------------
-%%% ZDSS: 西藏大学硕士毕业论文模板
+%%% ZDSS: 西藏大学硕博毕业论文模板
 %%% Copyright : 2021-2024 (c) <ylxdxx@qq.com>
 %%% Repository: https://gitee.com/ylxdxx/ZD-SS-template
 %%% License   : The LaTeX Project Public License 1.3c
