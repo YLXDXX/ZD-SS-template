@@ -27,8 +27,8 @@
 %It also deals properly with nested package loading, and
 %so is the recommended way to use LaTeX3 syntax inside LaTeX2e packages.
 \ProvidesExplPackage{ZDSS} % Package name
-{2024-02-16} % Release date
-{0.1} % Release version
+{2024-11-26} % Release date
+{0.2} % Release version
 {西藏大学硕士毕业论文模板} % Description
 
 
@@ -702,7 +702,7 @@ contentsname = 目\hspace{\ccwd}录,
 
 \RequirePackage{multicol} %两行排术语表
 %目录自动创建
-\NewDocumentCommand \TOCautoCreate { m }
+\NewDocumentCommand \TOCautoCreate {  }
 {
 
 %添加「目录」到目录项
