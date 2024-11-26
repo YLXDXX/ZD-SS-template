@@ -57,6 +57,16 @@
 \tl_new:N   \l_ZD_school_name_tl % 学校名称
 \tl_new:N   \l_ZD_school_code_tl % 学校代码
 \tl_new:N   \l_ZD_security_classification_tl % 论文密级
+\tl_new:N   \l_ZD_degree_level_tl % 学位层级：硕士、博士
+\int_new:N  \l_ZD_degree_level_int
+
+
+\int_const:Nn \c_ZD_master_degree_int {1} %硕士
+\tl_const:Nn \c_ZD_master_degree_tl {master}
+
+\int_const:Nn \c_ZD_doctor_degree_int {2} %博士
+\tl_const:Nn \c_ZD_doctor_degree_tl {doctor}
+
 
 %功能控制
 \bool_new:N   \l_ZD_terms_create_bool %是否添加术语表
@@ -429,6 +439,7 @@ contentsname = 目\hspace{\ccwd}录,
     school_name .tl_set:N  = \l_ZD_school_name_tl,
     school_code .tl_set:N  = \l_ZD_school_code_tl,
     security_classification .tl_set:N  = \l_ZD_security_classification_tl,
+    degree_level .tl_set:N  = \l_ZD_degree_level_tl,
     
     terms_create .bool_set:N = \l_ZD_terms_create_bool,
     print_version .bool_set:N = \l_ZD_print_version_bool,
@@ -462,6 +473,21 @@ contentsname = 目\hspace{\ccwd}录,
 		\bool_set_false:N \l_ZD_print_version_bool
     }
     {}
+    
+    \tl_if_eq:NNTF \l_ZD_degree_level_tl \c_ZD_master_degree_tl 
+    {
+		\int_set_eq:NN \l_ZD_degree_level_int \c_ZD_master_degree_int
+    }
+    {
+		\tl_if_eq:NNTF \l_ZD_degree_level_tl \c_ZD_doctor_degree_tl
+		{
+			\int_set_eq:NN \l_ZD_degree_level_int \c_ZD_doctor_degree_int
+		}
+		{
+			\PackageError { setting } { degree~level~ `\tl_use:N \l_ZD_degree_level_tl' ~not~defined } { }
+		}
+    }
+    
 }
 
 
@@ -494,18 +520,35 @@ contentsname = 目\hspace{\ccwd}录,
 	\vspace*{14mm}
 	\includegraphics[height=46mm]{pic/logo/png/dpi_300/all_new.png} %图标
 	\\
-	\vspace*{11mm}
+	%硕士和博士这里有区别
+	\int_case:nn \l_ZD_degree_level_int %根据 \l_ZD_degree_level_int 的值来确定不同的情况
 	{
-	\songti\LARGE
-	\textbf{硕\hspace{\ccwd}士 \hspace{\ccwd} 学 \hspace{\ccwd} 位 \hspace{\ccwd} 论 \hspace{\ccwd} 文}
-	\par
-	\vspace*{2mm}
-	}
-	{
-	\songti\large
-	\textbf{（ \tl_use:N \l_ZD_degree_type_tl ）} %学位类型
-	\par
-	\vspace*{6mm}
+		{\c_ZD_master_degree_int} %硕士的情况
+		{
+			\vspace*{11mm}
+			{
+			\songti\LARGE
+			\textbf{硕 \hspace{\ccwd} 士 \hspace{\ccwd} 学 \hspace{\ccwd} 位 \hspace{\ccwd} 论 \hspace{\ccwd} 文}
+			\par
+			\vspace*{2mm}
+			}
+			{
+			\songti\large
+			\textbf{（ \tl_use:N \l_ZD_degree_type_tl ）} %学位类型
+			\par
+			\vspace*{6mm}
+			}
+		}
+		{\c_ZD_doctor_degree_int} %博士的情况
+		{
+			\vspace*{11mm}
+			{
+			\songti\LARGE
+			\textbf{博 \hspace{\ccwd} 士 \hspace{\ccwd} 学 \hspace{\ccwd} 位 \hspace{\ccwd} 论 \hspace{\ccwd} 文}
+			\par
+			\vspace*{14mm}
+			}
+		}
 	}
 	{
 	\kaishu\zihao{1}
