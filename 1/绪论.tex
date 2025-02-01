@@ -145,6 +145,7 @@
 	\caption{图片排版示例}
 \end{figure}
 
+
 \section{公式测试}
 
 劳仑衣普桑，认至将指点效则机，最你更枝。想极整月正进好志次回总般，段
@@ -330,6 +331,71 @@
 	\label{fig:pic1}
 \end{figure}
 \footnotetext{frog图片注释测试}
+
+
+
+
+
+\section{双语标题测试}
+
+图片双语标题：图片双语标题：图片双语标题：图片双语标题：图片双语标题：图片双语标题：图片双语标题：图片双语标题：图片双语标题：图片双语标题：图片双语标题：见图 \ref{dulang_fig}
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}{0.4\linewidth}
+		\centering
+		\includegraphics[scale=.5]{example-image-c}
+		\bicaption{说明}{explanation}
+	\end{subfigure}
+	\hfil
+	\begin{subfigure}{0.4\linewidth}
+		\centering
+		\includegraphics[scale=.5]{example-image}
+		\bicaption{演示}{demonstration}
+	\end{subfigure}
+	
+	\bicaption{超长长长长长长长长长长长长\\ 长长长长长长长长长长长长长长长长长长长长长长长长\\ 长长长长长长长长长长长长长长长长长长长长标题，图片引用测试}{Super long long long long long long long long long long \\ long long long long long long long long long long long long long \\ long long long long long long title, image citation test. }
+	\label{dulang_fig}
+\end{figure}
+
+表格双语标题：表格双语标题：表格双语标题：表格双语标题：表格双语标题：表格双语标题：表格双语标题：表格双语标题：表格双语标题：表格双语标题：表格双语标题： 见表 \ref{dulang_tale}
+\begin{table}[h!]
+	\centering
+	\bicaption{表格引用测试}{Table reference test.} \label{dulang_tale}
+	\begin{subtable}{0.4\linewidth}
+		\centering
+		\begin{tblr}{
+				row{odd} = {bg=azure8},
+				row{1}   = {bg=azure3, fg=white, font=\sffamily},
+			}
+			Alpha & Beta    & Gamma \\
+			Delta & Epsilon & Zeta  \\
+			Eta   & Theta   & Iota  \\
+			Kappa & Lambda  & Mu    \\
+			Nu Xi Omicron & Pi Rho Sigma & Tau Upsilon Phi \\
+		\end{tblr}
+		\bicaption{说明}{explanation}
+	\end{subtable}
+	\hfill
+	\begin{subtable}{0.4\linewidth}
+		\centering
+		$\begin{tblr}{
+				column{1} = {mode=text},
+				column{3} = {mode=dmath},
+			}
+			\hline
+			Alpha   & \frac12 & \frac12 \\
+			Epsilon & \frac34 & \frac34 \\
+			Iota    & \frac56 & \frac56 \\
+			Epsilon & \frac34 & \frac34 \\
+			\hline
+		\end{tblr}$
+		\bicaption{演示}{demonstration}
+	\end{subtable}
+\end{table}
+
+
+
+
 
 
 

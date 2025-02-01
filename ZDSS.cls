@@ -1,7 +1,7 @@
 %%% % -*- coding: utf-8 -*-
 %%% ----------------------------------------------------------------------------
 %%% ZDSS: 西藏大学硕博毕业论文模板
-%%% Copyright : 2021-2024 (c) <ylxdxx@qq.com>
+%%% Copyright : 2021-2025 (c) <ylxdxx@qq.com>
 %%% Repository: https://gitee.com/ylxdxx/ZD-SS-template
 %%% License   : The LaTeX Project Public License 1.3c
 %%% ----------------------------------------------------------------------------
@@ -316,7 +316,10 @@ contentsname = 目\hspace{\ccwd}录,
 %对图片表格标题和子标题的控制
 %Figures, Subfigures and Tables
 \RequirePackage{caption}
+\RequirePackage{bicaption} %双语表题
 \RequirePackage{subcaption}
+
+
 
 %图片、表格标题的设置
 \DeclareCaptionFormat{My-Format}{\zihao{5}{\heiti #1#2} \quad #3\par}
@@ -328,6 +331,13 @@ contentsname = 目\hspace{\ccwd}录,
 %图表标号
 \renewcommand{\thefigure}{\thechapter--\arabic{figure}}
 \renewcommand{\thetable}{\thechapter--\arabic{table}}
+
+%双语标题设置
+\captionsetup[figure][bi-first]{name=图}
+\captionsetup[figure][bi-second]{name=Fig.}
+\captionsetup[table][bi-first]{name=表}
+\captionsetup[table][bi-second]{name=Tab.}
+
 
 %公式编号
 %\DeclareDocumentCommand{\theequation}{}{\thechapter--\arabic{equation}} % 这里不能使用 LaTeX3 的语法来定义
@@ -490,8 +500,105 @@ contentsname = 目\hspace{\ccwd}录,
     
 }
 
+%
+% 定义错误消息
+%
+\msg_new:nnn { ZD_Msg_Cover } { Teacher_Info_Mismatch } %导师信息匹配错误
+{
+  ERROR: ~ The ~ Cover ~ Teacher ~ Info ~ Mismatch.
+}
+
+\msg_new:nnn { ZD_Msg_Cover } { Teacher_Num_Many } %导师数量过多
+{
+  ERROR: ~ The ~ Cover ~ Teacher ~ Number ~ Too ~ Many.
+}
+
 
 %封面绘制
+
+%封面的表格「填写相关内容」
+%这表格里，需作判断，进行各种格式设定
+%需要利用 tabularray 中的 expand 选项
+%选把表格的内容生成好，再传入表格中即可
+\NewExpandableDocumentCommand \CoverDrawInfoTableBody { }
+{
+	%这里不能用两个\space，会被压缩成一个
+	姓名：~ & \exp_not:n{\texttt{\char32}\texttt{\char32}} & \tl_use:N \l_ZD_student_name_tl \\
+	%这里，指导教师可能有多位，需要进行处理，采取不同对应的排版
+
+	% 检查两个序列的长度是否相同
+	\int_compare:nTF { \seq_count:N \l_tmpa_seq = \seq_count:N \l_tmpb_seq }
+	{
+		%长度相同
+		\int_case:nnTF {\seq_count:N \l_tmpa_seq}
+		{
+			{0}
+			{
+				指导教师：~ & & 
+							\tl_use:N \l_ZD_teacher_name_tl 
+							\exp_not:n{ \hspace{\ccwd} \hspace{\ccwd} }
+							\tl_use:N \l_ZD_teacher_title_tl
+							\\
+			}
+			{1}
+			{
+				指导教师：~ & & 
+							\tl_use:N \l_ZD_teacher_name_tl 
+							\exp_not:n{ \hspace{\ccwd} \hspace{\ccwd} }
+							\tl_use:N \l_ZD_teacher_title_tl
+							\\
+			}
+			{2}
+			{
+				指导教师：~ & & 
+							\seq_item:Nn \l_tmpa_seq {1}
+							\exp_not:n{ \hspace{\ccwd} \hspace{\ccwd} }
+							\seq_item:Nn \l_tmpb_seq {1}
+							\\
+							& & 
+							\seq_item:Nn \l_tmpa_seq {2}
+							\exp_not:n{ \hspace{\ccwd} \hspace{\ccwd} }
+							\seq_item:Nn \l_tmpb_seq {2}
+							\\
+			}
+			{3}
+			{
+				指导教师：~ & & 
+							\seq_item:Nn \l_tmpa_seq {1}
+							\exp_not:n{ \hspace{\ccwd} \hspace{\ccwd} }
+							\seq_item:Nn \l_tmpb_seq {1}
+							\\
+							& & 
+							\seq_item:Nn \l_tmpa_seq {2}
+							\exp_not:n{ \hspace{\ccwd} \hspace{\ccwd} }
+							\seq_item:Nn \l_tmpb_seq {2}
+							\\
+							& & 
+							\seq_item:Nn \l_tmpa_seq {3}
+							\exp_not:n{ \hspace{\ccwd} \hspace{\ccwd} }
+							\seq_item:Nn \l_tmpb_seq {3}
+							\\
+			}
+		}
+		{}
+		{
+		%导师数量过多，报错
+		\msg_error:nn { ZD_Msg_Cover } { Teacher_Num_Many }
+		}
+	}
+	{
+		% 如果长度不同，报错
+		\msg_error:nn { ZD_Msg_Cover } { Teacher_Info_Mismatch }
+	}
+	
+	
+	学院：~ & & \tl_use:N \l_ZD_college_tl \\
+	专业：~ & & \tl_use:N \l_ZD_major_tl \\
+	研究方向：~ & & \tl_use:N \l_ZD_research_orientation_tl\\
+	完成日期：~ & & \tl_use:N \l_ZD_complete_date_tl \\
+}
+
+
 \NewDocumentCommand \CoverDraw { }
 {
 \thispagestyle{empty}
@@ -562,20 +669,18 @@ contentsname = 目\hspace{\ccwd}录,
 	}
 	{
 	\songti\zihao{4}
-	\begin{tblr}{
-			colspec={lcm{13\ccwd}},
+	\seq_set_split:NnV \l_tmpa_seq { , } {\l_ZD_teacher_name_tl} %使用系统提供的临时变量
+	\seq_set_split:NnV \l_tmpb_seq { , } {\l_ZD_teacher_title_tl}
+	\begin{tblr}[expand=\expanded]{%表格设定
+			colspec={lcm{12\ccwd}},
 			hline{1}={white},
 			hlines = {2-3}{solid},
 			columns = {leftsep=0pt, rightsep=0pt,},
-			rows = {abovesep=8pt,belowsep=-1pt},
-		} %这里不能用两个\space，会被压缩成一个
-		\makebox[5\ccwd][s]{姓名}：~\hspace{0.5em} & \texttt{\char32}\texttt{\char32} & \tl_use:N \l_ZD_student_name_tl \\
-		\makebox[5\ccwd][s]{指导教师}：~ & & \tl_use:N \l_ZD_teacher_name_tl 
-		\hspace{\ccwd} \hspace{\ccwd} \tl_use:N \l_ZD_teacher_title_tl \\
-		\makebox[5\ccwd][s]{学院}：~ & & \tl_use:N \l_ZD_college_tl \\
-		\makebox[5\ccwd][s]{专业}：~ & & \tl_use:N \l_ZD_major_tl \\
-		\makebox[5\ccwd][s]{研究方向}：~ & & \tl_use:N \l_ZD_research_orientation_tl\\
-		\makebox[5\ccwd][s]{完成日期}：~ & & \tl_use:N \l_ZD_complete_date_tl \\
+			rows = {abovesep=9pt,belowsep=-1pt},
+			cell{1-8}{1} = {cmd=\makebox[5\ccwd][s]},
+		}
+		%表格的主体，由命令生成
+		\expanded{\CoverDrawInfoTableBody}
 	\end{tblr}
 	}
 \end{center}
