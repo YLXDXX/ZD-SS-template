@@ -84,7 +84,22 @@
 
 %正文为宋体小四号字
 \LoadClass[UTF8,a4paper,zihao=-4,twoside,]{ctexbook} %纸张、正文字号
-\RenewDocumentCommand{\cleardoublepage}{}{\clearpage} %用以取消 chapter 强制在奇数页，因为奇偶页眉页脚需用到 twoside 参数
+%\RenewDocumentCommand{\cleardoublepage}{}{\clearpage} %用以取消 chapter 强制在奇数页，因为奇偶页眉页脚需用到 twoside 参数
+\RenewDocumentCommand{\cleardoublepage}{}{ %重写 \cleardoublepage 命令
+	\clearpage
+	\bool_if:NTF {\l_ZD_print_version_bool}
+	{
+		%若为真，则需判断是否需要加入空白页
+		\int_if_odd:nTF {\theMyPageAllCounter} %判断奇偶，第一章（绪论）需为装订的右页
+		{} % true
+		{ % false
+		\thispagestyle{empty} \null \stepcounter{MyPageAllCounter} \newpage % false, 为奇，插入空白页
+		}
+	}
+	{
+		%若为假，什么都不做
+	}
+}
 %\RequirePackage{no-math}{fontspec}%此处无效，ctexbook已经先行调用
 
 
@@ -785,6 +800,19 @@ contentsname = 目\hspace{\ccwd}录,
 %英文摘要
 \NewDocumentCommand \EnAbstract { }
 {
+\bool_if:NTF {\l_ZD_print_version_bool}
+{
+	%若为真，则需判断是否需要加入空白页
+	\int_if_odd:nTF {\theMyPageAllCounter} %判断奇偶
+	{} % true
+	{ % false
+	\thispagestyle{empty} \null \stepcounter{MyPageAllCounter} \newpage % false, 为奇，插入空白页
+	}
+}
+{
+%若为假，什么都不做
+}
+
 \phantomsection %让超链接能够正确链接，一般是加入目录用
 \addcontentsline{toc}{chapter}{ABSTRACT}
 \begin{center}
@@ -809,6 +837,18 @@ contentsname = 目\hspace{\ccwd}录,
 %目录自动创建
 \NewDocumentCommand \TOCautoCreate {  }
 {
+\bool_if:NTF {\l_ZD_print_version_bool}
+{
+	%若为真，则需判断是否需要加入空白页
+	\int_if_odd:nTF {\theMyPageAllCounter} %判断奇偶
+	{} % true
+	{ % false
+	\thispagestyle{empty} \null \stepcounter{MyPageAllCounter} \newpage % false, 为奇，插入空白页
+	}
+}
+{
+%若为假，什么都不做
+}
 
 %添加「目录」到目录项
 \phantomsection %让超链接能够正确链接，一般是加入目录用
@@ -839,7 +879,7 @@ contentsname = 目\hspace{\ccwd}录,
 \bool_if:NTF {\l_ZD_print_version_bool}
 {
 	%若为真，则需判断是否需要加入空白页
-	\int_if_odd:nTF {\theMyPageAllCounter} %判断奇偶，第一章（绪论）需为装订的右页
+	\int_if_odd:nTF {\theMyPageAllCounter} %判断奇偶
 	{} % true
 	{ % false
 	\thispagestyle{empty} \null \stepcounter{MyPageAllCounter} \newpage % false, 为奇，插入空白页
