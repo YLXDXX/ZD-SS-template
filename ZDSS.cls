@@ -71,7 +71,26 @@
 %功能控制
 \bool_new:N   \l_ZD_terms_create_bool %是否添加术语表
 \bool_new:N   \l_ZD_print_version_bool %是否生成打印版本PDF
-\bool_new:N \l_ZD_anonymously_review_bool % 是否启用盲审格式
+\bool_new:N   \l_ZD_anonymously_review_bool % 是否启用盲审格式
+
+\bool_new:N   \l_ZD_hyperlink_color_bool %是否对超链接添加颜色
+\tl_new:N     \l_ZD_hyperlink_color_tl %超链接颜色
+
+%
+%这里处理从宏包在调用加载时给出的参数
+%如：\documentclass[hyperlink_color=true]{ZDSS}
+%
+\keys_define:nn {ZDSS}
+{
+    hyperlink_color_is .bool_set:N = \l_ZD_hyperlink_color_bool,
+    hyperlink_color .tl_set:N  = \l_ZD_hyperlink_color_tl,
+    
+    % 初始值
+    hyperlink_color_is .initial:n = {false},
+    hyperlink_color .initial:n = {blue},
+    
+}
+\ProcessKeyOptions[ZDSS] %处理传入参数
 
 
 
@@ -241,8 +260,24 @@
 
 
 %超链接
-\RequirePackage[bookmarksnumbered,draft=false,colorlinks=true,CJKbookmarks=true,linkcolor=black,citecolor=black,urlcolor=black,hyperindex]{hyperref}
 % bookmarksnumbered 在pdf书签中加入章节序号
+\bool_if:NTF {\l_ZD_hyperlink_color_bool}
+{
+\RequirePackage[bookmarksnumbered,draft=false,CJKbookmarks=true,
+				colorlinks=true,
+				linkcolor=\tl_use:N \l_ZD_hyperlink_color_tl,
+				citecolor=\tl_use:N \l_ZD_hyperlink_color_tl,
+				urlcolor=\tl_use:N \l_ZD_hyperlink_color_tl,
+				anchorcolor=\tl_use:N \l_ZD_hyperlink_color_tl,
+				filecolor=\tl_use:N \l_ZD_hyperlink_color_tl,
+				hyperindex]{hyperref}
+}
+{
+\RequirePackage[bookmarksnumbered,draft=false,CJKbookmarks=true,
+				colorlinks=false,hyperindex,hidelinks]{hyperref}
+}
+
+
 
 %\RequirePackage[font=small,labelfont={bf,color=main}]{caption,subcaption}%对图片表格标题和子标题的控制
 % 采用带圈数字符号代替*号脚注
