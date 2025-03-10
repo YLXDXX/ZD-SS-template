@@ -428,27 +428,60 @@ contentsname = 目\hspace{\ccwd}录,
 \counterwithout*{footnote}{chapter}%取消脚注计数器跟章节的关联
 
 
-%设置脚注样式
+%设置脚注
 \renewcommand*\thefootnote{\mykkctr{footnote}}
 
-
-%在页面底部的脚注内容中，取消编号的上标样式
-%https://zhuanlan.zhihu.com/p/74515148
-\RequirePackage{xpatch}
-
-% cancel the superscript style of counter used in footnote text
-\xpatchcmd\@makefntext
-{{\hss\@makefnmark}}
-{{\hss\@makefnmark@nosuperscript}\space}
-{}{\fail}
+\RequirePackage[hang,flushmargin]{footmisc} %脚注悬挂对齐
 
 % old: superscript style
 % \def\@makefnmark{\hbox{\@textsuperscript{\normalfont\@thefnmark}}}
 
 % new: normal style, lower baseline
-\def\@makefnmark@nosuperscript{\lower .0ex \hbox{\normalfont\@thefnmark}}
+\def\@makefnmark@nosuperscript{\lower .0ex \hbox{\normalfont\@thefnmark}\;}
+
+%将脚注里的上标转为正常字符
+\renewcommand{\@makefntext}[1]{%
+    \ifFN@hangfoot
+      \bgroup
+      \setbox\@tempboxa\hbox{%
+        \ifdim\footnotemargin>0pt
+          \hb@xt@\footnotemargin{\@makefnmark@nosuperscript\hss}%
+        \else
+          \@makefnmark@nosuperscript
+        \fi
+      }%
+      \leftmargin\wd\@tempboxa
+      \rightmargin\z@
+      \linewidth \columnwidth
+      \advance \linewidth -\leftmargin
+      \parshape \@ne \leftmargin \linewidth
+      \footnotesize
+      \@setpar{{\@@par}}%
+      \leavevmode
+      \llap{\box\@tempboxa}%
+      \parskip\hangfootparskip\relax
+      \parindent\hangfootparindent\relax
+    \else
+      \parindent1em
+      \noindent
+      \ifdim\footnotemargin>\z@
+        \hb@xt@ \footnotemargin{\hss\@makefnmark@nosuperscript}%
+      \else
+        \ifdim\footnotemargin=\z@
+          \llap{\@makefnmark@nosuperscript}%
+        \else
+          \llap{\hb@xt@ -\footnotemargin{\@makefnmark@nosuperscript\hss}}%
+        \fi
+      \fi
+    \fi
+    \footnotelayout#1%
+    \ifFN@hangfoot
+      \par\egroup
+    \fi
+}
 
 %注释与正文之间加细线分隔
+\RequirePackage{xpatch}
 % shorten footnote rule
 \xpatchcmd\footnoterule
 {.4\columnwidth}
