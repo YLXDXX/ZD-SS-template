@@ -268,13 +268,21 @@
 %\RequirePackage{amsthm}%证明定理等环境，与精细设定ntheorem有冲突
 \RequirePackage{amsfonts} %用来输入各种符号的特殊形态，例如字母的花体、空心体等，配合amssymb使用
 \RequirePackage{mathrsfs} %数学中的花体(不是太花的)
-\RequirePackage[upright=true]{derivative}%分数导数微分偏微分增量改变量等 
+\RequirePackage[upright=true]{derivative}%分数、导数、微分、偏微分、增量改变量等符号
 \RequirePackage{braket} %量子算符宏包 
 \RequirePackage{esint} % various fancy integral symbols %积分符号
 \RequirePackage{enumitem}%列表
-
+\RequirePackage{bm} %加粗 \bm{}
+\RequirePackage{physics} %物理常用符号
+\RequirePackage{algorithm2e} %算法排版
+\RequirePackage{gensymb} %度 \degree
+\RequirePackage{minted} %%插入代码
 \RequirePackage{zhlipsum}%中文假文\zhlipsum[2-4]
 \RequirePackage{lipsum}%英文徦文
+
+
+
+
 
 
 %攻读学位期间论文发表环境
