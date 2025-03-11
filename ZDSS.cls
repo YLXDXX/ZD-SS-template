@@ -1012,23 +1012,27 @@ contentsname = 目\hspace{\ccwd}录,
 }
 
 
-\NewExpandableDocumentCommand{\myterm}{O{1}mm}
-{
+\NewExpandableDocumentCommand{\myterm}{O{0}mm}
+{%
 	\int_case:nnF {#1}
-	{
-		{0}{}%不显示任何信息
-		{1}{#2（#3）}%显示中英文
-		{2}{#2}%只显示中文
+	{%
+		{0}%默认显示中英文
+		{%
+			#2(#3)%
+			%仅在默认显示中英文的情况下，才将相应的术语写入术语表
+			%将术语写入文件，制作术语表
+			\iow_now:Nx \l_temp_trems_iow {%
+				\c_backslash_str item
+				^^J %换行符
+				%#2~\c_backslash_str quad~#3
+				#2：#3
+				}%
+		}
+		{1}%仅显示中文
+		{#2}
+		{2}{}%不显示任何信息
 	}
-	{\textcolor{red}{未定义}}%
-	
-	%将术语写入文件，制作术语表
-	\iow_now:Nx \l_temp_trems_iow {
-		\c_backslash_str item
-		^^J %换行符
-		%#2~\c_backslash_str quad~#3
-		 #2：#3
-		 }
+	{\textcolor{red}{未定义参数}}%
 }
 
 
