@@ -1,15 +1,9 @@
 \item
 类星体：quasi-stellar objects, QSOs
 \item
-解析解：analytic solution
-\item
 形式体系：formalism
 \item
-非对角线的：off-diagonal
-\item
 规范不变的：gauge-invariant
-\item
-各向异性的：anisotropic
 \item
 共动规范：comoving-gauge
 \item
@@ -21,10 +15,6 @@
 \item
 原初黑洞：primordial black holes, PBHs
 \item
-重加热：reheating
-\item
 量子色动力学转变：Quantum Chromodynamics transition, QCD transition
-\item
-重电离：reionization
 \item
 强能量条件：strong energy condition, SEC
