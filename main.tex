@@ -29,7 +29,7 @@ hyperlink_color ={blue},
 	school_code = {10694}, %学校代码
 	security_classification = {公开}, %论文密级
 	terms_create = {true}, %是否创建术语表: true/false，若选择创建，则在文中使用 \myterm[]{中文}{English} 命令可自动添加术语表条目
-	print_version = {true}, %是否生成打印版本的PDF: true/false，若为真，则在生成 PDF 时会自动添加空白页，以适应双面打印的需要
+	print_version = {false}, %是否生成打印版本的PDF: true/false，若为真，则在生成 PDF 时会自动添加空白页，以适应双面打印的需要
 	anonymously_review = {false}, %是否启用盲审格式
 }
 
@@ -68,9 +68,17 @@ hyperlink_color ={blue},
 
 
 \OtherStart %其它内容开始
-\include{1/发表目录} %攻读学位期间发表的学术论文目录
-\include{1/致谢} %致谢
-
+{
+	%正常情况下对应的内容
+	\include{1/科研成果} %攻读学位期间发表的学术论文目录
+	\include{1/致谢} %致谢
+}
+{
+	%盲审启用时对应的内容
+	%删去致谢，攻读学位期间科研成果格式有特殊要求
+	%不透露个人信息即可
+	\include{1/科研成果_盲审} %攻读学位期间发表的学术论文目录
+}
 
 
 

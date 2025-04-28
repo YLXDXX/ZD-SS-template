@@ -565,10 +565,20 @@ contentsname = 目\hspace{\ccwd}录,
     \bool_if:NTF {\l_ZD_anonymously_review_bool}
     {
 		%启用盲审格式时，隐去有关信息
-		\regex_replace_all:nnN{.}{＊}{\l_ZD_student_name_tl} %姓名
-		\regex_replace_all:nnN{.}{*}{\l_ZD_student_number_tl} %学号
-		\regex_replace_all:nnN{.}{＊}{\l_ZD_teacher_name_tl} %导师姓名
-		\regex_replace_all:nnN{.}{＊}{\l_ZD_teacher_title_tl} %导师职称
+		%\regex_replace_all:nnN{.}{＊}{\l_ZD_student_name_tl} %姓名
+		%\regex_replace_all:nnN{.}{*}{\l_ZD_student_number_tl} %学号
+		%\regex_replace_all:nnN{.}{＊}{\l_ZD_teacher_name_tl} %导师姓名
+		%\regex_replace_all:nnN{.}{＊}{\l_ZD_teacher_title_tl} %导师职称
+		
+		\tl_set:Nn \l_ZD_student_name_tl {} %姓名
+		\tl_set:Nn \l_ZD_student_number_tl {} %学号
+		\tl_set:Nn \l_ZD_teacher_name_tl {} %导师姓名
+		\tl_set:Nn \l_ZD_teacher_title_tl {} %导师职称
+		\tl_set:Nn \l_ZD_complete_date_tl {} %完成日期
+		\tl_set:Nn \l_ZD_college_tl {} % 学院
+		\tl_set:Nn \l_ZD_major_tl {} % 专业
+		\tl_set:Nn \l_ZD_research_orientation_tl {} % 研究方向
+		\tl_set:Nn \l_ZD_security_classification_tl {} % 密级
 		
 		%设置打印PDF版本为假
 		\bool_set_false:N \l_ZD_print_version_bool
@@ -793,55 +803,55 @@ contentsname = 目\hspace{\ccwd}录,
 
 \NewDocumentCommand \AuthorStatement { }
 {
-\thispagestyle{empty}
-\begin{center}
-\heiti \Large
-西藏大学研究生学位论文作者声明
-\par
-\vspace{18bp} %相当于空一行
-\end{center}
-\begingroup %控制行间距和字体范围
-\linespread{1.8} %单倍行间距
-\zihao{4}
-\par
-本人声明：本人呈交的学位论文是本人在导师指导下取得的研究成果。
-对前人及其他人员对本文的启发和贡献已在论文中做出了明确的声明，并表示了谢意。
-论文中除了特别加以标注和致谢的地方外，不包含其他人和其它机构已经发表或者撰写过的研究成果。
-\par
-本人同意学校根据《中华人民共和国学位条例暂行实施办法》等有关规定保留本人学位论文
-并向国家有关部门或资料库送交论文或者电子版，允许论文被查阅和借阅；
-本人授权西藏大学可以将本人学位论文的全部或者部分内容编入有关数据库进行检索，
-可以采用影印、缩印或者其它复制手段和汇编学位论文（保密论文在解密后应遵守此规定）。
-
-
-\begin{center}
-	\centering
+	%声明页
+	\thispagestyle{empty}
+	\begin{center}
+	\heiti \Large
+	西藏大学研究生学位论文作者声明
+	\par
+	\vspace{18bp} %相当于空一行
+	\end{center}
+	\begingroup %控制行间距和字体范围
+	\linespread{1.8} %单倍行间距
 	\zihao{4}
-	\begin{tblr}{colspec={XX},
-		leftsep=0pt,
-		rightsep=0pt,
+	\par
+	本人声明：本人呈交的学位论文是本人在导师指导下取得的研究成果。
+	对前人及其他人员对本文的启发和贡献已在论文中做出了明确的声明，并表示了谢意。
+	论文中除了特别加以标注和致谢的地方外，不包含其他人和其它机构已经发表或者撰写过的研究成果。
+	\par
+	本人同意学校根据《中华人民共和国学位条例暂行实施办法》等有关规定保留本人学位论文
+	并向国家有关部门或资料库送交论文或者电子版，允许论文被查阅和借阅；
+	本人授权西藏大学可以将本人学位论文的全部或者部分内容编入有关数据库进行检索，
+	可以采用影印、缩印或者其它复制手段和汇编学位论文（保密论文在解密后应遵守此规定）。
+
+
+	\begin{center}
+		\centering
+		\zihao{4}
+		\begin{tblr}{colspec={XX},
+			leftsep=0pt,
+			rightsep=0pt,
+		}
+	&&\\
+	&&\\
+	学位论文作者签名：         &  \hspace{8mm}    指导教师签名： \\
+	&&\\
+	签字日期：\texttt{\char32}\texttt{\char32}年\texttt{\char32}\texttt{\char32}月\texttt{\char32}\texttt{\char32}日 
+	&  \hspace{8mm}   
+	签字日期：\texttt{\char32}\texttt{\char32}年\texttt{\char32}\texttt{\char32}月\texttt{\char32}\texttt{\char32}日
+	\end{tblr}
+	\end{center}
+	\endgroup
+	\clearpage
+
+	\bool_if:NTF {\l_ZD_print_version_bool}
+	{
+		%若为真，则需加入空白页
+		\thispagestyle{empty} \null \newpage % 插入空白页
 	}
-&&\\
-&&\\
-学位论文作者签名：         &  \hspace{8mm}    指导教师签名： \\
-&&\\
-签字日期：\texttt{\char32}\texttt{\char32}年\texttt{\char32}\texttt{\char32}月\texttt{\char32}\texttt{\char32}日 
-&  \hspace{8mm}   
-签字日期：\texttt{\char32}\texttt{\char32}年\texttt{\char32}\texttt{\char32}月\texttt{\char32}\texttt{\char32}日
-\end{tblr}
-\end{center}
-\endgroup
-\clearpage
-
-\bool_if:NTF {\l_ZD_print_version_bool}
-{
-	%若为真，则需加入空白页
-	\thispagestyle{empty} \null \newpage % 插入空白页
-}
-{
-	\newpage
-}
-
+	{
+		\newpage
+	}
 }
 
 
@@ -1036,8 +1046,6 @@ contentsname = 目\hspace{\ccwd}录,
 }
 
 
-
-
 %参考文献自动创建
 \NewDocumentCommand \RefautoCreate {  }
 {
@@ -1048,8 +1056,6 @@ contentsname = 目\hspace{\ccwd}录,
 }
 
 
-
-
 %附录开始
 \NewDocumentCommand \AppendixStart {  }
 {
@@ -1057,20 +1063,20 @@ contentsname = 目\hspace{\ccwd}录,
 }
 
 
-
-
-
-
 %其它内容开始
-\NewDocumentCommand \OtherStart {  }
+\NewDocumentCommand \OtherStart { mm }
 {
-
 % 设置相关科研成果目录和致谢的标题
 \ctexset{
-chapter/numbering=false,
-section/numbering=false,
-subsection/numbering=false,
-subsubsection/numbering=false,
+	chapter/numbering=false,
+	section/numbering=false,
+	subsection/numbering=false,
+	subsubsection/numbering=false,
 }
 
+%根据盲审是否启用，决定致谢和学术成果的显示
+\bool_if:NTF {\l_ZD_anonymously_review_bool}
+{ #2 }
+{ #1 }
 }
+
