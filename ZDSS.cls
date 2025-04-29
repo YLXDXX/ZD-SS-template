@@ -396,6 +396,13 @@ contentsname = 目\hspace{\ccwd}录,
 \captionsetup[table][bi-first]{name=表}
 \captionsetup[table][bi-second]{name=Tab.}
 
+%算法标题
+\counterwithin*{algocf}{chapter}
+\SetAlgorithmName{算法}{算法}{算法} %将算法环境标题由 Algorithm --> 算法
+\renewcommand{\thealgocf}{\thechapter--\arabic{algocf}}
+\SetAlgoCaptionSeparator{\space\space\space}
+\SetAlCapFnt{\zihao{5}\heiti}
+\SetAlCapNameFnt{\zihao{5}}
 
 %公式编号
 %\DeclareDocumentCommand{\theequation}{}{\thechapter--\arabic{equation}} % 这里不能使用 LaTeX3 的语法来定义
